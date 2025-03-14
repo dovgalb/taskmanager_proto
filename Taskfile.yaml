@@ -1,0 +1,16 @@
+version: "3"
+
+tasks:
+  generate_task_category:
+    aliases:
+      - gentc
+    desc: "Generate task_category code from protofile"
+    cmds:
+      - protoc -I proto proto/task_manager/task_category.proto --go_out=./gen/go --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative
+  generate_task:
+    aliases:
+      - gent
+    desc: "Generate task code from protofile"
+    cmds:
+      - protoc -I proto proto/task_manager/task.proto --go_out=./gen/go --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative
+

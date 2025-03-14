@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+
+
+package task;
+
+option  go_package = "dovgalb.task_manager.v1;task_manager_v1";
+
+service Task {
+  rpc Create (CreateRequest) returns (Response);
+  rpc Read (Request) returns (Response);
+  rpc Update (UpdateRequest) returns (Response);
+  rpc Delete (Request) returns (Response);
+}
+
+message CreateRequest{
+  string title = 1;
+  string description = 2;
+  bool is_completed = 3;
+  int64 task_category_id = 4;
+}
+
+message UpdateRequest{
+  int64 task_id = 1;
+  string title = 2;
+  string description = 3;
+  bool is_completed = 4;
+  int64 task_category_id = 5;
+  google.protobuf.FieldMask update_mask = 7;
+}
+
+
+message Response{
+  int64 task_id = 1;
+  string title = 2;
+  string description = 3;
+  bool is_completed = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+  int64 task_category_id = 7;
+}
+
+
+message Request {
+  int64 task_id = 1;
+}
