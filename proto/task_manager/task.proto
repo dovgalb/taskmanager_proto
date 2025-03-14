@@ -2,37 +2,50 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
-
+import "google/protobuf/empty.proto";
 
 package task;
 
-option  go_package = "dovgalb.task_manager.v1;task_manager_v1";
+option go_package = "dovgalb.task_manager.v1/task;task_v1";
 
+// Сервис для управления задачами
 service Task {
-  rpc Create (CreateRequest) returns (Response);
-  rpc Read (Request) returns (Response);
-  rpc Update (UpdateRequest) returns (Response);
-  rpc Delete (Request) returns (Response);
+  rpc CreateTask (CreateTaskRequest) returns (TaskResponse);
+  rpc ReadTask (ReadTaskRequest) returns (TaskResponse);
+  rpc UpdateTask (UpdateTaskRequest) returns (TaskResponse);
+  rpc DeleteTask (DeleteTaskRequest) returns (google.protobuf.Empty);
 }
 
-message CreateRequest{
+// Запрос на создание задачи
+message CreateTaskRequest {
   string title = 1;
   string description = 2;
   bool is_completed = 3;
   int64 task_category_id = 4;
 }
 
-message UpdateRequest{
+// Запрос на чтение задачи
+message ReadTaskRequest {
+  int64 task_id = 1;
+}
+
+// Запрос на обновление задачи
+message UpdateTaskRequest {
   int64 task_id = 1;
   string title = 2;
   string description = 3;
   bool is_completed = 4;
   int64 task_category_id = 5;
-  google.protobuf.FieldMask update_mask = 7;
+  google.protobuf.FieldMask update_mask = 6;
 }
 
+// Запрос на удаление задачи
+message DeleteTaskRequest {
+  int64 task_id = 1;
+}
 
-message Response{
+// Ответ с данными задачи
+message TaskResponse {
   int64 task_id = 1;
   string title = 2;
   string description = 3;
@@ -40,9 +53,4 @@ message Response{
   google.protobuf.Timestamp created_at = 5;
   google.protobuf.Timestamp updated_at = 6;
   int64 task_category_id = 7;
-}
-
-
-message Request {
-  int64 task_id = 1;
 }

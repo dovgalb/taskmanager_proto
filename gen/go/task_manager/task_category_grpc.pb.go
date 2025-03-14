@@ -4,13 +4,14 @@
 // - protoc             v5.29.3
 // source: task_manager/task_category.proto
 
-package task_manager_v1
+package task_category_v1
 
 import (
 	context "context"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,20 +20,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TaskCategory_Create_FullMethodName = "/task_category.TaskCategory/Create"
-	TaskCategory_Read_FullMethodName   = "/task_category.TaskCategory/Read"
-	TaskCategory_Update_FullMethodName = "/task_category.TaskCategory/Update"
-	TaskCategory_Delete_FullMethodName = "/task_category.TaskCategory/Delete"
+	TaskCategory_CreateTaskCategory_FullMethodName = "/task_category.TaskCategory/CreateTaskCategory"
+	TaskCategory_ReadTaskCategory_FullMethodName   = "/task_category.TaskCategory/ReadTaskCategory"
+	TaskCategory_UpdateTaskCategory_FullMethodName = "/task_category.TaskCategory/UpdateTaskCategory"
+	TaskCategory_DeleteTaskCategory_FullMethodName = "/task_category.TaskCategory/DeleteTaskCategory"
 )
 
 // TaskCategoryClient is the client API for TaskCategory service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Сервис для управления категориями задач
 type TaskCategoryClient interface {
-	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
-	Read(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*ReadResponse, error)
-	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
-	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
+	CreateTaskCategory(ctx context.Context, in *CreateTaskCategoryRequest, opts ...grpc.CallOption) (*CreateTaskCategoryResponse, error)
+	ReadTaskCategory(ctx context.Context, in *ReadTaskCategoryRequest, opts ...grpc.CallOption) (*TaskCategoryResponse, error)
+	UpdateTaskCategory(ctx context.Context, in *UpdateTaskCategoryRequest, opts ...grpc.CallOption) (*TaskCategoryResponse, error)
+	DeleteTaskCategory(ctx context.Context, in *DeleteTaskCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type taskCategoryClient struct {
@@ -43,40 +46,40 @@ func NewTaskCategoryClient(cc grpc.ClientConnInterface) TaskCategoryClient {
 	return &taskCategoryClient{cc}
 }
 
-func (c *taskCategoryClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
+func (c *taskCategoryClient) CreateTaskCategory(ctx context.Context, in *CreateTaskCategoryRequest, opts ...grpc.CallOption) (*CreateTaskCategoryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateResponse)
-	err := c.cc.Invoke(ctx, TaskCategory_Create_FullMethodName, in, out, cOpts...)
+	out := new(CreateTaskCategoryResponse)
+	err := c.cc.Invoke(ctx, TaskCategory_CreateTaskCategory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskCategoryClient) Read(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*ReadResponse, error) {
+func (c *taskCategoryClient) ReadTaskCategory(ctx context.Context, in *ReadTaskCategoryRequest, opts ...grpc.CallOption) (*TaskCategoryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReadResponse)
-	err := c.cc.Invoke(ctx, TaskCategory_Read_FullMethodName, in, out, cOpts...)
+	out := new(TaskCategoryResponse)
+	err := c.cc.Invoke(ctx, TaskCategory_ReadTaskCategory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskCategoryClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error) {
+func (c *taskCategoryClient) UpdateTaskCategory(ctx context.Context, in *UpdateTaskCategoryRequest, opts ...grpc.CallOption) (*TaskCategoryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateResponse)
-	err := c.cc.Invoke(ctx, TaskCategory_Update_FullMethodName, in, out, cOpts...)
+	out := new(TaskCategoryResponse)
+	err := c.cc.Invoke(ctx, TaskCategory_UpdateTaskCategory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskCategoryClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
+func (c *taskCategoryClient) DeleteTaskCategory(ctx context.Context, in *DeleteTaskCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteResponse)
-	err := c.cc.Invoke(ctx, TaskCategory_Delete_FullMethodName, in, out, cOpts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, TaskCategory_DeleteTaskCategory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -86,11 +89,13 @@ func (c *taskCategoryClient) Delete(ctx context.Context, in *DeleteRequest, opts
 // TaskCategoryServer is the server API for TaskCategory service.
 // All implementations must embed UnimplementedTaskCategoryServer
 // for forward compatibility.
+//
+// Сервис для управления категориями задач
 type TaskCategoryServer interface {
-	Create(context.Context, *CreateRequest) (*CreateResponse, error)
-	Read(context.Context, *ReadRequest) (*ReadResponse, error)
-	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
-	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
+	CreateTaskCategory(context.Context, *CreateTaskCategoryRequest) (*CreateTaskCategoryResponse, error)
+	ReadTaskCategory(context.Context, *ReadTaskCategoryRequest) (*TaskCategoryResponse, error)
+	UpdateTaskCategory(context.Context, *UpdateTaskCategoryRequest) (*TaskCategoryResponse, error)
+	DeleteTaskCategory(context.Context, *DeleteTaskCategoryRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedTaskCategoryServer()
 }
 
@@ -101,17 +106,17 @@ type TaskCategoryServer interface {
 // pointer dereference when methods are called.
 type UnimplementedTaskCategoryServer struct{}
 
-func (UnimplementedTaskCategoryServer) Create(context.Context, *CreateRequest) (*CreateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+func (UnimplementedTaskCategoryServer) CreateTaskCategory(context.Context, *CreateTaskCategoryRequest) (*CreateTaskCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTaskCategory not implemented")
 }
-func (UnimplementedTaskCategoryServer) Read(context.Context, *ReadRequest) (*ReadResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+func (UnimplementedTaskCategoryServer) ReadTaskCategory(context.Context, *ReadTaskCategoryRequest) (*TaskCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadTaskCategory not implemented")
 }
-func (UnimplementedTaskCategoryServer) Update(context.Context, *UpdateRequest) (*UpdateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+func (UnimplementedTaskCategoryServer) UpdateTaskCategory(context.Context, *UpdateTaskCategoryRequest) (*TaskCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaskCategory not implemented")
 }
-func (UnimplementedTaskCategoryServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+func (UnimplementedTaskCategoryServer) DeleteTaskCategory(context.Context, *DeleteTaskCategoryRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTaskCategory not implemented")
 }
 func (UnimplementedTaskCategoryServer) mustEmbedUnimplementedTaskCategoryServer() {}
 func (UnimplementedTaskCategoryServer) testEmbeddedByValue()                      {}
@@ -134,74 +139,74 @@ func RegisterTaskCategoryServer(s grpc.ServiceRegistrar, srv TaskCategoryServer)
 	s.RegisterService(&TaskCategory_ServiceDesc, srv)
 }
 
-func _TaskCategory_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateRequest)
+func _TaskCategory_CreateTaskCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTaskCategoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskCategoryServer).Create(ctx, in)
+		return srv.(TaskCategoryServer).CreateTaskCategory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskCategory_Create_FullMethodName,
+		FullMethod: TaskCategory_CreateTaskCategory_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskCategoryServer).Create(ctx, req.(*CreateRequest))
+		return srv.(TaskCategoryServer).CreateTaskCategory(ctx, req.(*CreateTaskCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskCategory_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReadRequest)
+func _TaskCategory_ReadTaskCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadTaskCategoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskCategoryServer).Read(ctx, in)
+		return srv.(TaskCategoryServer).ReadTaskCategory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskCategory_Read_FullMethodName,
+		FullMethod: TaskCategory_ReadTaskCategory_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskCategoryServer).Read(ctx, req.(*ReadRequest))
+		return srv.(TaskCategoryServer).ReadTaskCategory(ctx, req.(*ReadTaskCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskCategory_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateRequest)
+func _TaskCategory_UpdateTaskCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaskCategoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskCategoryServer).Update(ctx, in)
+		return srv.(TaskCategoryServer).UpdateTaskCategory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskCategory_Update_FullMethodName,
+		FullMethod: TaskCategory_UpdateTaskCategory_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskCategoryServer).Update(ctx, req.(*UpdateRequest))
+		return srv.(TaskCategoryServer).UpdateTaskCategory(ctx, req.(*UpdateTaskCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskCategory_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteRequest)
+func _TaskCategory_DeleteTaskCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTaskCategoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskCategoryServer).Delete(ctx, in)
+		return srv.(TaskCategoryServer).DeleteTaskCategory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskCategory_Delete_FullMethodName,
+		FullMethod: TaskCategory_DeleteTaskCategory_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskCategoryServer).Delete(ctx, req.(*DeleteRequest))
+		return srv.(TaskCategoryServer).DeleteTaskCategory(ctx, req.(*DeleteTaskCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -214,20 +219,20 @@ var TaskCategory_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*TaskCategoryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Create",
-			Handler:    _TaskCategory_Create_Handler,
+			MethodName: "CreateTaskCategory",
+			Handler:    _TaskCategory_CreateTaskCategory_Handler,
 		},
 		{
-			MethodName: "Read",
-			Handler:    _TaskCategory_Read_Handler,
+			MethodName: "ReadTaskCategory",
+			Handler:    _TaskCategory_ReadTaskCategory_Handler,
 		},
 		{
-			MethodName: "Update",
-			Handler:    _TaskCategory_Update_Handler,
+			MethodName: "UpdateTaskCategory",
+			Handler:    _TaskCategory_UpdateTaskCategory_Handler,
 		},
 		{
-			MethodName: "Delete",
-			Handler:    _TaskCategory_Delete_Handler,
+			MethodName: "DeleteTaskCategory",
+			Handler:    _TaskCategory_DeleteTaskCategory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

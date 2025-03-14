@@ -1,54 +1,49 @@
 syntax = "proto3";
 
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+
 package task_category;
 
-option  go_package = "dovgalb.task_manager.v1;task_manager_v1";
+option go_package = "dovgalb.task_manager.v1/task_category;task_category_v1";
 
+// Сервис для управления категориями задач
 service TaskCategory {
-  rpc Create (CreateRequest) returns (CreateResponse);
-  rpc Read (ReadRequest) returns (ReadResponse);
-  rpc Update (UpdateRequest) returns (UpdateResponse);
-  rpc Delete (DeleteRequest) returns (DeleteResponse);
+  rpc CreateTaskCategory (CreateTaskCategoryRequest) returns (CreateTaskCategoryResponse);
+  rpc ReadTaskCategory (ReadTaskCategoryRequest) returns (TaskCategoryResponse);
+  rpc UpdateTaskCategory (UpdateTaskCategoryRequest) returns (TaskCategoryResponse);
+  rpc DeleteTaskCategory (DeleteTaskCategoryRequest) returns (google.protobuf.Empty);
 }
 
-
-message CreateRequest {
+// Запрос на создание категории задач
+message CreateTaskCategoryRequest {
   string title = 1;
 }
 
-message CreateResponse{
+// Ответ на создание категории задач
+message CreateTaskCategoryResponse {
   int64 task_category_id = 1;
 }
 
-
-
-message ReadRequest {
-  int64 task_category_id =1;
-}
-
-message ReadResponse {
+// Запрос на чтение категории задач
+message ReadTaskCategoryRequest {
   int64 task_category_id = 1;
-  string title = 2;
 }
 
-
-
-message UpdateRequest {
+// Ответ с данными категории задач
+message TaskCategoryResponse {
   int64 task_category_id = 1;
   string title = 2;
 }
 
-message UpdateResponse {
+// Запрос на обновление категории задач
+message UpdateTaskCategoryRequest {
   int64 task_category_id = 1;
   string title = 2;
+  google.protobuf.FieldMask update_mask = 3;
 }
 
-
-
-message DeleteRequest{
-  int64 task_category_id = 1;
-}
-
-message DeleteResponse{
+// Запрос на удаление категории задач
+message DeleteTaskCategoryRequest {
   int64 task_category_id = 1;
 }
