@@ -18,7 +18,8 @@ service TaskCategory {
 
 // Запрос на создание категории задач
 message CreateTaskCategoryRequest {
-  string title = 1 [(validate.rules).string = {min_len: 1, max_len: 100}]; // Заголовок от 1 до 100 символов
+//  string title = 1 [(validate.rules).string = {min_len: 1, max_len: 100}]; // Заголовок от 1 до 100 символов
+  string title = 1; // Заголовок от 1 до 100 символов
 }
 
 // Ответ на создание категории задач
