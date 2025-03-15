@@ -3,6 +3,7 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
+import "validate/validate.proto"; // Импорт для валидации
 
 package task;
 
@@ -18,30 +19,30 @@ service Task {
 
 // Запрос на создание задачи
 message CreateTaskRequest {
-  string title = 1;
-  string description = 2;
+  string title = 1 [(validate.rules).string = {min_len: 1, max_len: 100}]; // Заголовок от 1 до 100 символов
+  string description = 2 [(validate.rules).string = {max_len: 1000}]; // Описание до 1000 символов
   bool is_completed = 3;
-  int64 task_category_id = 4;
+  int64 task_category_id = 4 [(validate.rules).int64 = {gt: 0}]; // ID категории должен быть положительным
 }
 
 // Запрос на чтение задачи
 message ReadTaskRequest {
-  int64 task_id = 1;
+  int64 task_id = 1 [(validate.rules).int64 = {gt: 0}]; // ID задачи должен быть положительным
 }
 
 // Запрос на обновление задачи
 message UpdateTaskRequest {
-  int64 task_id = 1;
-  string title = 2;
-  string description = 3;
+  int64 task_id = 1 [(validate.rules).int64 = {gt: 0}]; // ID задачи должен быть положительным
+  string title = 2 [(validate.rules).string = {min_len: 1, max_len: 100}];
+  string description = 3 [(validate.rules).string = {max_len: 1000}];
   bool is_completed = 4;
-  int64 task_category_id = 5;
+  int64 task_category_id = 5 [(validate.rules).int64 = {gt: 0}];
   google.protobuf.FieldMask update_mask = 6;
 }
 
 // Запрос на удаление задачи
 message DeleteTaskRequest {
-  int64 task_id = 1;
+  int64 task_id = 1 [(validate.rules).int64 = {gt: 0}]; // ID задачи должен быть положительным
 }
 
 // Ответ с данными задачи

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
+import "validate/validate.proto"; // Импорт для валидации
 
 package task_category;
 
@@ -17,7 +18,7 @@ service TaskCategory {
 
 // Запрос на создание категории задач
 message CreateTaskCategoryRequest {
-  string title = 1;
+  string title = 1 [(validate.rules).string = {min_len: 1, max_len: 100}]; // Заголовок от 1 до 100 символов
 }
 
 // Ответ на создание категории задач
@@ -27,7 +28,7 @@ message CreateTaskCategoryResponse {
 
 // Запрос на чтение категории задач
 message ReadTaskCategoryRequest {
-  int64 task_category_id = 1;
+  int64 task_category_id = 1 [(validate.rules).int64 = {gt: 0}]; // ID категории должен быть положительным
 }
 
 // Ответ с данными категории задач
@@ -38,12 +39,12 @@ message TaskCategoryResponse {
 
 // Запрос на обновление категории задач
 message UpdateTaskCategoryRequest {
-  int64 task_category_id = 1;
-  string title = 2;
+  int64 task_category_id = 1 [(validate.rules).int64 = {gt: 0}]; // ID категории должен быть положительным
+  string title = 2 [(validate.rules).string = {min_len: 1, max_len: 100}]; // Заголовок от 1 до 100 символов
   google.protobuf.FieldMask update_mask = 3;
 }
 
 // Запрос на удаление категории задач
 message DeleteTaskCategoryRequest {
-  int64 task_category_id = 1;
+  int64 task_category_id = 1 [(validate.rules).int64 = {gt: 0}]; // ID категории должен быть положительным
 }
