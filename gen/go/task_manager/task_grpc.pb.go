@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: task_manager/task.proto
 
-package task_manager_v1
+package task_v1
 
 import (
 	context "context"

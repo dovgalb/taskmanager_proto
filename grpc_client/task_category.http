@@ -2,5 +2,5 @@
 GRPC localhost:44044/task_category.TaskCategory/CreateTaskCategory
 
 {
-  "title": "helo"
+  "title": "hello"
 }

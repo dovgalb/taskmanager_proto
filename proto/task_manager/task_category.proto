@@ -2,11 +2,10 @@ syntax = "proto3";
 
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
-import "validate/validate.proto"; // Импорт для валидации
 
 package task_category;
 
-option go_package = "dovgalb.task_manager.v1/task_manager;task_manager_v1";
+option go_package = "dovgalb.task_manager.v1/task_category;task_category_v1";
 
 // Сервис для управления категориями задач
 service TaskCategory {
@@ -18,8 +17,7 @@ service TaskCategory {
 
 // Запрос на создание категории задач
 message CreateTaskCategoryRequest {
-//  string title = 1 [(validate.rules).string = {min_len: 1, max_len: 100}]; // Заголовок от 1 до 100 символов
-  string title = 1; // Заголовок от 1 до 100 символов
+  string title = 1;
 }
 
 // Ответ на создание категории задач
@@ -29,7 +27,7 @@ message CreateTaskCategoryResponse {
 
 // Запрос на чтение категории задач
 message ReadTaskCategoryRequest {
-  int64 task_category_id = 1 [(validate.rules).int64 = {gt: 0}]; // ID категории должен быть положительным
+  int64 task_category_id = 1;
 }
 
 // Ответ с данными категории задач
@@ -40,12 +38,12 @@ message TaskCategoryResponse {
 
 // Запрос на обновление категории задач
 message UpdateTaskCategoryRequest {
-  int64 task_category_id = 1 [(validate.rules).int64 = {gt: 0}]; // ID категории должен быть положительным
-  string title = 2 [(validate.rules).string = {min_len: 1, max_len: 100}]; // Заголовок от 1 до 100 символов
+  int64 task_category_id = 1;
+  string title = 2; //
   google.protobuf.FieldMask update_mask = 3;
 }
 
 // Запрос на удаление категории задач
 message DeleteTaskCategoryRequest {
-  int64 task_category_id = 1 [(validate.rules).int64 = {gt: 0}]; // ID категории должен быть положительным
+  int64 task_category_id = 1;
 }
