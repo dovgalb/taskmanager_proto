@@ -1,6 +1,8 @@
-### Создать категорию
-GRPC localhost:44044/task_category.TaskCategory/CreateTaskCategory
+GRPC localhost:44044/com.example.Service/method
+Key: Value
 
 {
-  "title": "hello"
+
 }
+
+###

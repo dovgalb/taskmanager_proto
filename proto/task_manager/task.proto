@@ -54,3 +54,44 @@ message TaskResponse {
   google.protobuf.Timestamp updated_at = 6;
   int64 task_category_id = 7;
 }
+
+// Сервис для управления категориями задач
+service TaskCategory {
+  rpc CreateTaskCategory (CreateTaskCategoryRequest) returns (CreateTaskCategoryResponse);
+  rpc ReadTaskCategory (ReadTaskCategoryRequest) returns (TaskCategoryResponse);
+  rpc UpdateTaskCategory (UpdateTaskCategoryRequest) returns (TaskCategoryResponse);
+  rpc DeleteTaskCategory (DeleteTaskCategoryRequest) returns (google.protobuf.Empty);
+}
+
+// Запрос на создание категории задач
+message CreateTaskCategoryRequest {
+  string title = 1;
+}
+
+// Ответ на создание категории задач
+message CreateTaskCategoryResponse {
+  int64 task_category_id = 1;
+}
+
+// Запрос на чтение категории задач
+message ReadTaskCategoryRequest {
+  int64 task_category_id = 1;
+}
+
+// Ответ с данными категории задач
+message TaskCategoryResponse {
+  int64 task_category_id = 1;
+  string title = 2;
+}
+
+// Запрос на обновление категории задач
+message UpdateTaskCategoryRequest {
+  int64 task_category_id = 1;
+  string title = 2; //
+  google.protobuf.FieldMask update_mask = 3;
+}
+
+// Запрос на удаление категории задач
+message DeleteTaskCategoryRequest {
+  int64 task_category_id = 1;
+}
