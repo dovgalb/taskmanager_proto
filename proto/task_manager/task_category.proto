@@ -6,7 +6,7 @@ import "validate/validate.proto"; // Импорт для валидации
 
 package task_category;
 
-option go_package = "dovgalb.task_category.v1/task_category;task_category_v1";
+option go_package = "dovgalb.task_manager.v1/task_manager;task_manager_v1";
 
 // Сервис для управления категориями задач
 service TaskCategory {
